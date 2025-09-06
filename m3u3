@@ -1,0 +1,412 @@
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+  
+<title>JOIN TV4WAP LIVE4WAP </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        :root {
+            --primary-bg: #141414;
+            --secondary-bg:#1F1F1F;
+            --text-primary: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --accent-color: #E50914;
+        }
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 50px 0 60px 0; /* Header height increased */
+        }
+        
+  
+        
+     .content { padding: 12px; }
+        .loading-placeholder { color: var(--text-secondary); text-align: center; padding: 9px; }
+        
+        .category-section { margin-bottom: 12px; }
+        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
+        .category-header h2 { font-size: 1.2rem; margin: 0; background:#000}
+        .card-carousel { display: flex; gap: 3px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; }
+        .card-carousel::-webkit-scrollbar { display: none; }
+        .full-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 3px; }
+        .channel-card { width: 100%; cursor: pointer; text-decoration: none; color: var(--text-primary); display: block; }
+        .channel-card img { width: 95%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 2px;border :1px solid#ccc; background-color: var(--secondary-bg); pointer-events: none; }
+        .card-title { font-size: 0.7rem; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; align-items: center; background-color: var(--secondary-bg); padding: 10px 0; z-index: 100; box-shadow: 0 -2px 5px rgba(0,0,0,0.3); }
+        .nav-item{display: flex; flex-direction: column; align-items: center; color: var(--text-secondary); text-decoration: none; font-size: 0.7rem; background: none; border: none; cursor: pointer; }
+ 
+        .nav-item.active { color: var(--text-primary); }
+        .nav-item svg { width: 24px; height: 24px; margin-bottom: 4px; stroke-width: 2; fill: none; stroke: currentColor; }
+        .nav-item.active svg { stroke: var(--accent-color); }
+        .page { display: none; }
+        .page.active { display: block; }
+  
+ 
+
+        .telegram-btn {position: fixed;
+            background-color: gold;
+            border:3px solid gold; 
+            padding: 2px 2px;
+            
+            text-decoration: none;
+            
+            transition: all 0.2s ease;
+            
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            white-space: nowrap;
+            width: 100%;
+            flex-shrink: 0;top:0px
+        }
+.telegram-btn1 {
+            background-color:red;
+            color: white;
+            padding: 2px 2px;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 900;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+            
+            flex-shrink: 0;
+        }
+.telegram-btn2 {
+            background-color: green;
+            color:white;
+            padding: 2px 2px;
+            border-radius: 0px;
+            text-decoration: none;
+            font-weight: 900;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+            
+            flex-shrink: 0;
+        }
+.search-bar{top:30px;position:fixed;color:#000;padding:2px} 
+     </style>  
+
+
+</head>
+  <table class="telegram-btn"><tr><td class="telegram-btn1" width="50%"><a href="https://t.me/tvgotk">LIVE4WAP </a></td><td class="telegram-btn2" width="50%"><a href="https://t.me/tv4wap">TV4WAP </a></td></tr></table>
+
+ 
+   <div class="search-bar"> <input type="text" id="search-input" placeholder="Search Channels" onkeyup="searchChannels()"></div>      
+
+<main class="content">
+   <!-- Home Page -->
+
+
+    <div id="home-page" class="page active">
+    <div id="home-categories-container">
+     
+    </div>
+   </div>
+   <!-- Live TV Page -->
+   <div id="live-page" class="page">
+    <div id="all-channels-container"></div>
+   </div>
+<div id="match-page" class="page">
+    <div class="subscription-container">
+     Bbbbbbbbbbbbb
+    </div>
+   </div>
+
+   <!-- Subscription Page -->
+   <div id="subscription-page" class="page">
+    <div class="subscription-container">
+     Aaaaaaaaass
+    </div>
+   </div>
+
+
+  </main>
+  <footer class="bottom-nav">
+   <button class="nav-item nav-link active" data-page="home-page" data-title="Home">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+    <span>Home</span>
+   </button>
+   <button class="nav-item nav-link" data-page="live-page" data-title="Live TV">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+     <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle>
+    </svg>
+    <span>Live</span>
+   </button>
+   <button class="nav-item nav-link" data-page="match-page" data-title="Subscription">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+     <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 1.5 4 4 4h1c-1.5 0-3-1.8-3-3s1.5-3 3-3h1c.5 0 1 .2 1.5.4C14 9.5 16 8 18 8c2 0 3 1.2 3 2.5S20 13 18 13h-1.5"></path>
+    </svg>
+    <span>FANCODE</span>
+   </button>
+   <button class="nav-item nav-link" data-page="subscription-page" data-title="Subscription">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+     <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 1.5 4 4 4h1c-1.5 0-3-1.8-3-3s1.5-3 3-3h1c.5 0 1 .2 1.5.4C14 9.5 16 8 18 8c2 0 3 1.2 3 2.5S20 13 18 13h-1.5"></path>
+    </svg>
+    <span>Subscription</span>
+   </button>
+   
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        const playlistUrl = 'https://raw.githubusercontent.com/Shubhamkur/Tv/refs/heads/main/tvm3u';
+        
+
+        const pages = document.querySelectorAll('.page');
+        const headerTitle = document.getElementById('header-title');
+        const bannerCarousel = document.getElementById('banner-carousel');
+        const homeCategoriesContainer = document.getElementById('home-categories-container');
+        const allChannelsContainer = document.getElementById('all-channels-container');
+        const searchInput = document.getElementById('search-input');
+
+        function parseM3U(data) {
+            if (!data || !data.trim().startsWith('#EXTM3U')) return [];
+            const lines = data.trim().split('\n');
+            const channels = [];
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].trim().startsWith('#EXTINF:')) {
+                    let streamUrl = lines[i + 1] ? lines[i + 1].trim() : '';
+                    if (!streamUrl || streamUrl.startsWith('#')) continue;
+                    
+                    const info = lines[i].trim();
+                    const nameMatch = info.match(/tvg-name="([^"]*)"/) || info.match(/,(.*)$/);
+                                    const idMatch = info.match(/tvg-id="([^"]*)"/);
+
+                    const logoMatch = info.match(/tvg-logo="([^"]*)"/);
+                    const groupMatch = info.match(/group-title="([^"]*)"/);
+                    
+                    channels.push({
+                        name: nameMatch ? nameMatch[1].trim() : 'Unnamed',
+                        logo: logoMatch ? logoMatch[1].trim() : 'https://placehold.co/280x160/1F1F1F/ffffff?text=No+Logo',
+                        streamUrl: streamUrl,
+                                         id: idMatch ? idMatch[1].trim() : 'no', 
+
+                        group: groupMatch ? groupMatch[1].trim() : 'General'
+                    });
+                    i++;
+                }
+            }
+            return channels;
+        }
+
+        function renderChannels(channels, container, isCarousel) {
+            const cardHtml = channels.map(channel => {
+                const playerUrl = `https://tv4wap.github.io/p2?url=${encodeURIComponent(channel.streamUrl)}`;
+
+                return `
+     <a href="${playerUrl}" class="channel-card" style="${isCarousel ? 'flex: 0 0 140px; width: 140px;' : ''}">
+                    <img src="${channel.logo}" alt="${channel.name}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/280x160/1F1F1F/ffffff?text=No+Logo';">
+                    <div class="card-title">${channel.name}</div>
+                </a>`;
+            }).join('');
+            container.innerHTML = cardHtml || '<div class="loading-placeholder">No channels found.</div>';
+        }
+        
+        function renderBanners(sliders) {
+            if (!sliders || sliders.length === 0) return;
+            bannerCarousel.innerHTML = sliders.map((slide, index) => `
+                <div class="banner-slide ${index === 0 ? 'active' : ''}" style="background-image: url('${slide.imageUrl}');">
+                    <div class="banner-title-container"><div class="banner-title">${slide.title}</div></div>
+                </div>`).join('');
+            let currentSlide = 0;
+            const slides = bannerCarousel.querySelectorAll('.banner-slide');
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 5000);
+            }
+        }
+
+        async function loadInitialData() {
+            
+            try {
+                const response = await fetch(playlistUrl);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const m3uText = await response.text();
+                const allChannelsData = parseM3U(m3uText);
+
+                if (allChannelsData.length === 0) throw new Error('No channels found.');
+                
+                // Logic to preserve playlist order
+                const groupedChannels = {};
+                const groupOrder = [];
+
+
+
+
+                allChannelsData.forEach(channel => {
+                    const group = channel.group || 'General';
+
+                    
+                    if (!groupedChannels[group]) {
+                        groupedChannels[group] = [];
+                        groupOrder.push(group); // Add group to the order array only when it's first seen
+                    }
+                    groupedChannels[group].push(channel);
+                });
+
+                homeCategoriesContainer.innerHTML = ''; 
+                allChannelsContainer.innerHTML = '';
+                
+                // Render categories based on the original playlist order
+                groupOrder.forEach(groupName => {
+                    const channels = groupedChannels[groupName];
+                    
+                    const homeSection = document.createElement('section');
+                    homeSection.className = 'category-section';
+                    homeSection.innerHTML = `<div class="category-header"><h2>${groupName}</h2></div><div class="card-carousel"></div>`;
+                    homeCategoriesContainer.appendChild(homeSection);
+                    renderChannels(channels, homeSection.querySelector('.card-carousel'), true);
+                    
+                    const liveSection = document.createElement('section');
+                    liveSection.className = 'category-section';
+                    liveSection.innerHTML = `<div  class="category-header"><h2>${groupName}</h2></div><div class="full-grid"></div>`;
+                    allChannelsContainer.appendChild(liveSection);
+                    renderChannels(channels, liveSection.querySelector('.full-grid'), false);
+                });
+                
+
+
+            } catch (error) {
+                console.error('Failed to load channels:', error);
+                const errorMessage = `<p class="loading-placeholder">Could not load channels. <br> ${error.message}</p>`;
+                homeCategoriesContainer.innerHTML = errorMessage;
+                allChannelsContainer.innerHTML = errorMessage;
+            }
+        }
+
+        
+        
+                
+        function switchPage(pageId, title) {
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId)?.classList.add('active');
+            
+            document.querySelectorAll('.nav-item.nav-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.page === pageId);
+            });
+            headerTitle.textContent = title;
+            const isSubPage = pageId === 'subscription-page';
+            headerTitle.classList.toggle('active', !isSubPage);
+            document.querySelector('.search-container').style.display = isSubPage ? 'none' : 'flex';
+            document.querySelector('.time-display').style.display = isSubPage ? 'none' : 'block';
+             if (isSubPage) {
+                document.querySelector('.header').style.gridTemplateColumns = 'auto 1fr auto';
+             }
+        }
+ function filterChannels() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const activePage = document.querySelector('.page.active');
+            if (!activePage) return;
+
+            activePage.querySelectorAll('.category-section').forEach(section => {
+                let categoryHasVisibleChannel = false;
+                section.querySelectorAll('.channel-card').forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const isMatch = title.includes(searchTerm);
+                    card.style.display = isMatch ? '' : 'none';
+                    if (isMatch) categoryHasVisibleChannel = true;
+                });
+                section.style.display = categoryHasVisibleChannel ? '' : 'none';
+            });
+        }
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.dataset.page) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchPage(link.dataset.page, link.dataset.title);
+                });
+            }
+        });
+
+        document.querySelector('main.content').addEventListener('click', (e) => {
+            const buyButton = e.target.closest('.buy-btn');
+            if(buyButton && buyButton.dataset.link) {
+                window.location.href = buyButton.dataset.link;
+            }
+        });
+        
+
+
+searchInput.addEventListener('input', filterChannels);
+        
+        loadInitialData();
+        switchPage('home-page', 'Home');
+    });
+    </script>
+ 
+ 
+<script>
+ // à¦°à¦¾à¦‡à¦Ÿ-à¦•à§à¦²à¦¿à¦• à¦¨à¦¿à¦·à§à¦•à§à¦°à¦¿à¦¯à¦¼ à¦•à¦°à¦¾
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+            alert("Sorry! Right-click is disabled.");
+        });
+
+        // à¦•à§€à¦¬à§‹à¦°à§à¦¡ à¦¶à¦°à§à¦Ÿà¦•à¦¾à¦Ÿ à¦¨à¦¿à¦·à§à¦•à§à¦°à¦¿à¦¯à¦¼ à¦•à¦°à¦¾
+        document.addEventListener('keydown', function(event) {
+            // F12 (à¦¡à§‡à¦­à§‡à¦²à¦ªà¦¾à¦° à¦Ÿà§à¦²à¦¸)
+            if (event.key === 'F12') {
+                event.preventDefault();
+                alert("F12 is disabled.");
+            }
+
+            // Ctrl+Shift+I (Inspect Element)
+            if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                event.preventDefault();
+                alert("Inspect element is disabled.");
+            }
+
+            // Ctrl+Shift+J (Console)
+            if (event.ctrlKey && event.shiftKey && event.key === 'J') {
+                event.preventDefault();
+                alert("Console is disabled.");
+            }
+
+            // Ctrl+U (View Source Code)
+            if (event.ctrlKey && event.key === 'u') {
+                event.preventDefault();
+                alert("View source is disabled.");
+            }
+
+            // Ctrl+S (Save Page)
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+                alert("Save page is disabled.");
+            }
+
+            // Ctrl+P (Print)
+            if (event.ctrlKey && event.key === 'p') {
+                event.preventDefault();
+                alert("Print is disabled.");
+            }
+        });
+
+
+// Security Features
+document.addEventListener('contextmenu', (event) => event.preventDefault());
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'F12' || 
+        (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key)) || 
+        (event.ctrlKey && event.key === 'U')) {
+        event.preventDefault();
+    }
+});
+
+</script>
